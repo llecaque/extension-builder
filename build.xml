@@ -9,11 +9,13 @@
 	
 	<target name="prepare">
 		<mkdir dir="src" />
-		<exec command="pwd && ls" />
+		<exec command="pwd" />
+		<exec command="ls" />
+
 	</target>
 	
-	<target name="test" depends="prepare">
-		
+	<target name="test" description="let s test that">
+		<phingcall target="prepare" />
 		<echo msg="test" />
 	</target>
 
