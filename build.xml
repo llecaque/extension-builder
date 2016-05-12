@@ -5,5 +5,9 @@
 			<arg value="-l" />
 		</exec>
 	</target>
+	
+	<target name="copy">
+		<copy file="build.xml" todir="${project.basedir}" />
+	</target>
 
 </project>
