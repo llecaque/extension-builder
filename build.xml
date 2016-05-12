@@ -6,7 +6,14 @@
 		</exec>
 	</target>
 	
-	<target name="test">
+	
+	<target name="prepare">
+		<mkdir dir="src" />
+		<exec command="pwd && ls" />
+	</target>
+	
+	<target name="test" depends="prepare">
+		
 		<echo msg="test" />
 	</target>
 
