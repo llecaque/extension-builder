@@ -8,8 +8,8 @@
 	
 	
 	<target name="prepare">
-		<exec command="pwd" />
-		<exec command="ls" />
+		<exec command="pwd" passthru="true" />
+		<exec command="ls src/" passthru="true" />
 
 	</target>
 	
