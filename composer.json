@@ -9,6 +9,9 @@
 	],
 	"homepage" : "http://www.taotesting.com",
 	"license" : "GPL-2.0",
+	"scripts": {
+        "post-update-cmd": "cp vendor/oat-sa/extension-builder/build.xml ."
+	}
 	"require" : {
 		"phing/phing": "2.*",
 		"pear/versioncontrol_git" : "dev-master"
