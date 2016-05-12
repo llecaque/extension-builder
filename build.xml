@@ -1,0 +1,9 @@
+<project name="build tao" default="help">
+    	<target name="help">
+		<echo msg ="Available Command : " />
+		<exec executable="vendor/bin/phing" passthru="true">
+			<arg value="-l" />
+		</exec>
+	</target>
+
+</project>
