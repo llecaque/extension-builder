@@ -8,13 +8,13 @@
 	
 	
 	<target name="prepare">
-		<mkdir dir="src" />
 		<exec command="pwd" />
 		<exec command="ls" />
 
 	</target>
 	
 	<target name="test" description="let s test that">
+		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="src" />
 		<phingcall target="prepare" />
 		<echo msg="test" />
 	</target>
