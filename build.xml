@@ -6,8 +6,8 @@
 		</exec>
 	</target>
 	
-	<target name="copy">
-		<copy file="build.xml" todir="${project.basedir}" />
+	<target name="test">
+		<echo msg="test" />
 	</target>
 
 </project>
