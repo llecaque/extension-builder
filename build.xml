@@ -15,6 +15,14 @@
 	
 	<target name="test" description="let s test that">
 		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="src" />
+		<composer command="update" composer="${composer.bin}" >
+			<arg value="--no-interaction" />
+			<arg value="--no-scripts" />
+			<arg value="--no-progress" />
+			<arg value="--working-dir" />
+			<arg path="src" />
+
+		</composer>
 		<phingcall target="prepare" />
 		<echo msg="test" />
 	</target>
