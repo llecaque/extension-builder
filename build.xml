@@ -1,6 +1,6 @@
 <project name="build tao" default="help">
 	
-	<echo msg="${application.startdir}" />
+	<echo msg="${base.dir}" />
     <target name="help">
 		<echo msg ="Available Command : " />
 		<exec executable="vendor/bin/phing" passthru="true">
@@ -17,7 +17,7 @@
 	
 	<target name="test" description="let s test that">
 		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="src" />
-		<composer command="update" composer="$application.startdir}/../composer" >
+		<composer command="install" composer="../../../../composer" >
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
@@ -26,6 +26,16 @@
 
 		</composer>
 		<phingcall target="prepare" />
+		
+		<composer command="update" composer="../../../../composer" >
+	
+			<arg value="--no-interaction" />
+			<arg value="--no-scripts" />
+			<arg value="--no-progress" />
+			<arg value="--working-dir" />
+			<arg path="src" />
+			<arg value="oat-sa/tao-core" />
+		</composer>
 		<echo msg="test" />
 	</target>
 
