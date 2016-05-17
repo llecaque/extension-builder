@@ -14,7 +14,7 @@
 	
 	
 	<target name="test">
-		<phingcall target="push_composer_lock" /
+		<phingcall target="push_composer_lock" />
 
 	</target>
 	
