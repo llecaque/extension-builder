@@ -1,6 +1,7 @@
 <project name="build tao" default="help">
 	
 	<property name="branch" value="test/master-phpunit" />
+	<property name="extension_branch" value="develop" /<
 	<resolvepath propertyName="composer.resolved" file="../../../../composer" />
 	<echo msg="${composer.resolved}" />
     <target name="help">
@@ -55,9 +56,8 @@
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
 			<arg path="${src.dir.resolved}" />
-			<arg value="oat-sa/tao-core" />
+			<arg value="oat-sa/tao-core:dev-${extension_branch}" />
 		</composer>
-		<echo msg="test" />
 	</target>
 	
 	<target name="push_composer_lock" description="Update and push composer.lock" depends="clone">
@@ -69,7 +69,7 @@
             dir="${src.dir.resolved}" 
           />
 
-		<exec command='git commit -m "build ${buildNumber}"' logoutput="true" dir="${src.dir.resolved}" passthru="true" />
+		<exec command='git commit -m "Automatic build from PR' logoutput="true" dir="${src.dir.resolved}" passthru="true" />
 
 		<gitpush 
 			repository="${src.dir.resolved}"
