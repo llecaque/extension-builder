@@ -68,7 +68,21 @@
             command="ls" 
             logoutput="true" 
             passthru="true" 
-            dir="${src.dir.resolved}" 
+            dir="${build.dir.resolved}" 
+          />
+          
+      	<exec 
+            command="mv ${build.dir.resolved} /tmp/" 
+            logoutput="true" 
+            passthru="true" 
+            dir="${build.dir.resolved}" 
+          />
+          
+        <exec 
+            command="ls /tmp/" 
+            logoutput="true" 
+            passthru="true" 
+            dir="${build.dir.resolved}" 
           />
 
 	</target>
