@@ -1,6 +1,7 @@
 <project name="build tao" default="help">
 	
 	<property name="branch" value="test/master-phpunit" />
+	<property name="extension" value="oat-sa/tao-core" />
 	<property name="extension_branch" value="develop" />
 	<resolvepath propertyName="composer.resolved" file="../../../../composer" />
 	<echo msg="${composer.resolved}" />
@@ -14,6 +15,7 @@
 	
 	<target name="test">
 		<phingcall target="clone" />
+		<phingcall target="push_composer_lock" />
 
 	</target>
 	
@@ -56,7 +58,7 @@
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
 			<arg path="${src.dir.resolved}" />
-			<arg value="oat-sa/tao-core:dev-${extension_branch}" />
+			<arg value="${extension}" />
 		</composer>
 	</target>
 	
