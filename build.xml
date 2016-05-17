@@ -1,7 +1,7 @@
 <project name="build tao" default="help">
 	
 	<property name="branch" value="test/master-phpunit" />
-	<property name="extension_branch" value="develop" /<
+	<property name="extension_branch" value="develop" />
 	<resolvepath propertyName="composer.resolved" file="../../../../composer" />
 	<echo msg="${composer.resolved}" />
     <target name="help">
