@@ -71,11 +71,18 @@
           />
 
 		<exec command='git commit -m "Automatic build from PR' logoutput="true" dir="${src.dir.resolved}" passthru="true" />
-
+		<!-- 
 		<gitpush 
 			repository="${src.dir.resolved}"
 			refspec="${branch}:${branch}"
 			destination="origin" />
+		-->
+		<exec 
+            command="git push origin ${branch}" 
+            logoutput="true" 
+            passthru="true" 
+            dir="${src.dir.resolved}" 
+          />
 	</target>
 
 </project>
