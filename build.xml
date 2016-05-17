@@ -1,6 +1,8 @@
 <project name="build tao" default="help">
 	
-	<echo msg="${base.dir}" />
+	<property name="branch" value="test/master-phpunit" />
+	<resolvepath propertyName="composer.resolved" file="../../../../composer" />
+	<echo msg="${composer.resolved}" />
     <target name="help">
 		<echo msg ="Available Command : " />
 		<exec executable="vendor/bin/phing" passthru="true">
@@ -9,34 +11,70 @@
 	</target>
 	
 	
-	<target name="prepare">
-		<exec command="pwd" passthru="true" />
-		<exec command="ls src/" passthru="true" />
+	<target name="test">
+		<phingcall target="clone" />
 
 	</target>
 	
-	<target name="test" description="let s test that">
+	<target name="clone" description="clone deployer package">
 		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="src" />
-		<composer command="install" composer="../../../../composer" >
+		<resolvepath propertyName="src.dir.resolved" file="src" />
+		
+		<if>
+			<equals arg1="${branch}" arg2="master" />
+			<then>
+				<echo level="info" msg="Already on master" />
+			</then>
+			<else> 
+				<echo level="info" msg="Fetch ${branch} " />
+		<gitfetch 
+			repository="${src.dir.resolved}" 		
+			source="origin" 
+			refspec="${branch}:${branch}"
+		/>
+		<gitcheckout
+    		repository="${src.dir.resolved}"
+    		branchname="${branch}"
+    	/>
+		</else>
+		</if>
+		
+		<composer command="install" composer="${composer.resolved}" >
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
-			<arg path="src" />
+			<arg path="${src.dir.resolved}" />
 
 		</composer>
-		<phingcall target="prepare" />
-		
-		<composer command="update" composer="../../../../composer" >
+
+		<composer command="update" composer="${composer.resolved}" >
 	
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
-			<arg path="src" />
+			<arg path="${src.dir.resolved}" />
 			<arg value="oat-sa/tao-core" />
 		</composer>
 		<echo msg="test" />
+	</target>
+	
+	<target name="push_composer_lock" description="Update and push composer.lock" depends="clone,composer_update,build_number">
+
+		<exec 
+            command="git add composer.lock build" 
+            logoutput="true" 
+            passthru="true" 
+            dir="${src.dir.resolved}" 
+          />
+
+		<exec command='git commit -m "build ${buildNumber}"' logoutput="true" dir="${src.dir.resolved}" passthru="true" />
+
+		<gitpush 
+			repository="${src.dir.resolved}"
+			refspec="${branch}:${branch}"
+			destination="origin" />
 	</target>
 
 </project>
