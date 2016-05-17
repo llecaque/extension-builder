@@ -3,7 +3,8 @@
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
 	<property name="extension_branch" value="develop" />
-	<resolvepath propertyName="composer.resolved" file="../../../../composer" />
+	<resolvepath propertyName="build.dir.resolved" file="../../../.." />
+	<resolvepath propertyName="composer.resolved" file="${build.dir.resolved}/composer" />
 	<echo msg="${composer.resolved}" />
     <target name="help">
 		<echo msg ="Available Command : " />
@@ -19,8 +20,8 @@
 	</target>
 	
 	<target name="clone" description="clone deployer package">
-		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="src" />
-		<resolvepath propertyName="src.dir.resolved" file="src" />
+		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/src" />
+		<resolvepath propertyName="src.dir.resolved" file="${build.dir.resolved}/src" />
 		
 		<if>
 			<equals arg1="${branch}" arg2="master" />
@@ -64,25 +65,12 @@
 	<target name="push_composer_lock" description="Update and push composer.lock" depends="clone">
 
 		<exec 
-            command="git add composer.lock build" 
+            command="ls" 
             logoutput="true" 
             passthru="true" 
             dir="${src.dir.resolved}" 
           />
 
-		<exec command='git commit -m "Automatic build from PR' logoutput="true" dir="${src.dir.resolved}" passthru="true" />
-		<!-- 
-		<gitpush 
-			repository="${src.dir.resolved}"
-			refspec="${branch}:${branch}"
-			destination="origin" />
-		-->
-		<exec 
-            command="git push origin ${branch}" 
-            logoutput="true" 
-            passthru="true" 
-            dir="${src.dir.resolved}" 
-          />
 	</target>
 
 </project>
