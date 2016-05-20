@@ -69,7 +69,7 @@
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>
 		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
-		<delete dir="${package.folder}" />
+		<delete dir="${package.folder.resolved}" />
 		<echo msg="Making package ${TSTAMP} in ${package.dir.resolved}"/>
 		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
