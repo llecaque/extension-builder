@@ -65,12 +65,10 @@
 	
 		<target name="Generate_package" description="Emulate output form continuesphp service">
 
-		<tstamp>
-			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
-		</tstamp>
+
 		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
 		<delete dir="${package.dir.resolved}" />
-		<echo msg="Making package ${TSTAMP} in ${package.dir.resolved}"/>
+
 		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
 		<delete file="${build.dir.resolved}/package.tar.gz"/>
@@ -93,12 +91,16 @@
 	</target>
 	
 	<target name="deploy">
-		<echo msg="fake-tao-${BUILD_NUMBER}" />
+		<tstamp>
+			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
+		</tstamp>		
+		<echo msg="fake-tao-${BUILD_NUMBER}_${TSTAMP}" />
 		<http-request
 		url="http://deploy.taocloud.org/deploy"
 		verbose="true"
 		method="POST">
 			<postparameter name="package_url" value="${build.dir.resolved}/package.tar.gz" />
+			<postparameter name="id" value="fake-tao-${BUILD_NUMBER}_${TSTAMP}" />
 		</http-request>
 		
 	</target>
