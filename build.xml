@@ -99,10 +99,14 @@
 	</target>
 	
 	<target name="deploy">
-
+		 <exec command="/usr/local/bin/aws s3 cp ${build.dir.resolved}/${package.name}.tar.gz s3://tao-jenkins-pubfiles/"
+		      passthru="true"
+              checkreturn="true"/>
+              
 		<http-request
 		url="http://deploy.taocloud.org/deploy"
 		verbose="true"
+		responseRegex='/"success":true/'
 		method="POST">
 			<postparameter name="package_url" value="https://s3.amazonaws.com/tao-jenkins-pubfiles/${package.name}.tar.gz" />
 			<postparameter name="build_id" value="${package.name}" />
