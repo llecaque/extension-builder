@@ -64,15 +64,17 @@
 	</target>
 	
 		<target name="Generate_package" description="Emulate output form continuesphp service">
+
 		<tstamp>
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>
 		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
+		<delete dir="${package.folder}" />
 		<echo msg="Making package ${TSTAMP} in ${package.dir.resolved}"/>
 		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
-		<delete file="${package.folder}/package.tar.gz"/>
-		<tar destfile="${package.folder}/package.tar.gz" compression="gzip" includeemptydirs="true">
+		<delete file="${build.folder.resolved}/package.tar.gz"/>
+		<tar destfile="${build.folder.resolved}/package.tar.gz" compression="gzip" includeemptydirs="true">
 			<fileset dir="${package.dir.resolved}" expandsymboliclinks="true" excludes="db.local.properties">
 				<include name="**/**" />
 			</fileset>
