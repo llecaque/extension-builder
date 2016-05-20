@@ -32,12 +32,12 @@
 			<else> 
 				<echo level="info" msg="Fetch ${branch} " />
 		<gitfetch 
-			repository="${src.dir.resolved}" 		
+			repository="${package.dir.resolved}" 		
 			source="origin" 
 			refspec="${branch}:${branch}"
 		/>
 		<gitcheckout
-    		repository="${src.dir.resolved}"
+    		repository="${package.dir.resolved}"
     		branchname="${branch}"
     	/>
 		</else>
