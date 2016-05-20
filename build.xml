@@ -99,7 +99,7 @@
 	</target>
 	
 	<target name="deploy">
-		 <exec command="/usr/bin/aws s3 cp ${build.dir.resolved}/${package.name}.tar.gz s3://tao-jenkins-pubfiles/"
+		 <exec command="/usr/bin/aws s3 cp --region eu-west-1 ${build.dir.resolved}/${package.name}.tar.gz s3://tao-jenkins-pubfiles/"
 		      passthru="true"
               checkreturn="true"/>
               
