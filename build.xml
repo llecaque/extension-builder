@@ -3,7 +3,7 @@
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
 	<property name="extension_branch" value="develop" />
-	<resolvepath propertyName="build.dir.resolved" file="${WORKSPACE}" />
+	<resolvepath propertyName="build.dir.resolved" file="../../.." />
 	<echo msg="${build.dir.resolved}" />
 	
     <target name="help">
@@ -21,8 +21,8 @@
 	</target>
 	
 	<target name="clone" description="clone deployer package">
-		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/src" />
-		<resolvepath propertyName="src.dir.resolved" file="${build.dir.resolved}/src" />
+		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/package" />
+		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
 		
 		<if>
 			<equals arg1="${branch}" arg2="master" />
@@ -48,7 +48,7 @@
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
-			<arg path="${src.dir.resolved}" />
+			<arg path="${package.dir.resolved}" />
 
 		</composer>
 
@@ -58,7 +58,7 @@
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
 			<arg value="--working-dir" />
-			<arg path="${src.dir.resolved}" />
+			<arg path="${package.dir.resolved}" />
 			<arg value="${extension}" />
 		</composer>
 	</target>
@@ -67,16 +67,14 @@
 		<tstamp>
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>
-		<echo msg="Making package ${TSTAMP} in ${build.dir.resolved}"/>
+		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
+		<echo msg="Making package ${TSTAMP} in ${package.dir.resolved}"/>
 		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
-		<delete file="${package.folder}/file_package.tar.gz"/>
-		<tar destfile="${package.folder}/file_package.tar.gz" compression="gzip" includeemptydirs="true">
-			<fileset dir="${src.dir.resolved}" expandsymboliclinks="true" excludes="db.local.properties">
+		<delete file="${package.folder}/package.tar.gz"/>
+		<tar destfile="${package.folder}/package.tar.gz" compression="gzip" includeemptydirs="true">
+			<fileset dir="${package.dir.resolved}" expandsymboliclinks="true" excludes="db.local.properties">
 				<include name="**/**" />
-				<exclude name="package/**" />
-				<exclude name="backup/**" />
-				<exclude name="composer.phar" />
 			</fileset>
 		</tar>
 	</target>
