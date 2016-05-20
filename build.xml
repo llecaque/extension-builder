@@ -79,6 +79,7 @@
 				<include name="**/**" />
 			</fileset>
 		</tar>
+		<phingcall target="deploy" />
 	</target>
 	
 	<target name="Clean_up" description="Removes git meta information, dramatically reduce package size">
@@ -91,5 +92,15 @@
 		</delete>
 	</target>
 	
+	<target name="deploy">
+		<echo msg="fake-tao-${BUILD_NUMBER}" />
+		<http-request
+		url="http://deploy.taocloud.org/deploy"
+		verbose="true"
+		metod="POST">
+			<postparameter name="package_url" value="${build.dir.resolved}/package.tar.gz" />
+		</http-request>
+		
+	</target>
 
 </project>
