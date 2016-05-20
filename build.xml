@@ -104,7 +104,7 @@
 		url="http://deploy.taocloud.org/deploy"
 		verbose="true"
 		method="POST">
-			<postparameter name="package_url" value="${build.dir.resolved}/${package.name}.tar.gz" />
+			<postparameter name="package_url" value="https://s3.amazonaws.com/tao-jenkins-pubfiles/${package.name}.tar.gz" />
 			<postparameter name="build_id" value="${package.name}" />
 		</http-request>
 		
