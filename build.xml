@@ -63,6 +63,33 @@
 		</composer>
 	</target>
 	
+		<target name="Generate_package" description="Emulate output form continuesphp service">
+		<tstamp>
+			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
+		</tstamp>
+		<echo msg="Making package ${TSTAMP} in ${package.resolved}"/>
+		<phingcall target="Clean_up"/>
+		<delete file="${package.folder}/file_package.tar.gz"/>
+		<tar destfile="${package.folder}/file_package.tar.gz" compression="gzip" includeemptydirs="true">
+			<fileset dir="${src.dir.resolved}" expandsymboliclinks="true" excludes="db.local.properties">
+				<include name="**/**" />
+				<exclude name="package/**" />
+				<exclude name="backup/**" />
+				<exclude name="composer.phar" />
+			</fileset>
+		</tar>
+	</target>
+	
+	<target name="Clean_up" description="Removes git meta information, dramatically reduce package size">
+		<echo msg="">Root calculated as ${src.dir.resolved}}</echo>
+		<delete includeemptydirs="true">
+			<fileset dir="${src.dir.resolved}" defaultexcludes="false">
+				<exclude name=".git/**"/>
+				<include name="**/.git/**"/>
+			</fileset>
+		</delete>
+	</target>
+	
 	<target name="push_composer_lock" description="Update and push composer.lock" depends="clone">
 
 		<exec 
