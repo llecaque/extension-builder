@@ -109,7 +109,7 @@
 		verbose="true"
 		responseRegex='/"success":true/'
 		method="POST">
-			<postparameter name="package_url" value="https://s3.amazonaws.com/tao-jenkins-pubfiles/${package.name}.tar.gz" />
+			<postparameter name="package_url" value="http://tao-jenkins-pubfiles.s3-website-us-east-1.amazonaws.com/${package.name}.tar.gz" />
 			<postparameter name="build_id" value="${package.name}" />
 		</http-request>
 		
