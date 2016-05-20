@@ -82,32 +82,14 @@
 	</target>
 	
 	<target name="Clean_up" description="Removes git meta information, dramatically reduce package size">
-		<echo msg="">Root calculated as ${src.dir.resolved}}</echo>
+		<echo msg="">Root calculated as ${build.dir.resolved}/package</echo>
 		<delete includeemptydirs="true">
-			<fileset dir="${src.dir.resolved}" defaultexcludes="false">
+			<fileset dir="${build.dir.resolved}/package" defaultexcludes="false">
 				<exclude name=".git/**"/>
 				<include name="**/.git/**"/>
 			</fileset>
 		</delete>
 	</target>
 	
-	<target name="push_composer_lock" description="Update and push composer.lock" depends="clone">
-
-		<exec 
-            command="ls" 
-            logoutput="true" 
-            passthru="true" 
-            dir="${build.dir.resolved}/workspace" 
-          />
-          
-          
-        <exec 
-            command="ls" 
-            logoutput="true" 
-            passthru="true" 
-            dir="${build.dir.resolved}/workspace.new" 
-          />
-
-	</target>
 
 </project>
