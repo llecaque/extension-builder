@@ -3,7 +3,7 @@
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
 	<property name="extension_branch" value="develop" />
-	<resolvepath propertyName="build.dir.resolved" file="." />
+	<resolvepath propertyName="build.dir.resolved" file="${WORKSPACE}" />
 	<echo msg="${build.dir.resolved}" />
 	
     <target name="help">
@@ -43,7 +43,7 @@
 		</else>
 		</if>
 		
-		<composer command="install" >
+		<composer command="install" composer="/usr/loca/bin/composer" >
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
@@ -52,7 +52,7 @@
 
 		</composer>
 
-		<composer command="update" >
+		<composer command="update" composer="/usr/loca/bin/composer">
 	
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
@@ -67,7 +67,7 @@
 		<tstamp>
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>
-		<echo msg="Making package ${TSTAMP} in ${package.resolved}"/>
+		<echo msg="Making package ${TSTAMP} in ${build.dir.resolved}"/>
 		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
 		<delete file="${package.folder}/file_package.tar.gz"/>
