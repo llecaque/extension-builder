@@ -72,7 +72,7 @@
 		</composer>
 	</target>
 	
-	<target name="Generate_package" description="Emulate output form continuesphp service" depends="prepare">
+	<target name="Generate_package" description="Emulate output form continuesphp service" depends="clean">
 
 
 		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
