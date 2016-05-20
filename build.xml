@@ -94,13 +94,13 @@
 		<tstamp>
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>		
-		<echo msg="fake-tao-${BUILD_NUMBER}_${TSTAMP}" />
+		<echo msg="fake-tao-${buildNumber}_${TSTAMP}" />
 		<http-request
 		url="http://deploy.taocloud.org/deploy"
 		verbose="true"
 		method="POST">
 			<postparameter name="package_url" value="${build.dir.resolved}/package.tar.gz" />
-			<postparameter name="id" value="fake-tao-${BUILD_NUMBER}_${TSTAMP}" />
+			<postparameter name="build_id" value="fake-tao-${BUILD_NUMBER}_${TSTAMP}" />
 		</http-request>
 		
 	</target>
