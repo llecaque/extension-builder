@@ -97,7 +97,7 @@
 		<http-request
 		url="http://deploy.taocloud.org/deploy"
 		verbose="true"
-		metod="POST">
+		method="POST">
 			<postparameter name="package_url" value="${build.dir.resolved}/package.tar.gz" />
 		</http-request>
 		
