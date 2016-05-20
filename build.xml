@@ -3,9 +3,9 @@
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
 	<property name="extension_branch" value="develop" />
-	<resolvepath propertyName="build.dir.resolved" file="../../../.." />
-	<resolvepath propertyName="composer.resolved" file="${build.dir.resolved}/composer" />
-	<echo msg="${composer.resolved}" />
+	<resolvepath propertyName="build.dir.resolved" file="." />
+	<echo msg="${build.dir.resolved}" />
+	
     <target name="help">
 		<echo msg ="Available Command : " />
 		<exec executable="vendor/bin/phing" passthru="true">
@@ -21,8 +21,8 @@
 	</target>
 	
 	<target name="clone" description="clone deployer package">
-		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/workspace.new" />
-		<resolvepath propertyName="src.dir.resolved" file="${build.dir.resolved}/workspace.new" />
+		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/src" />
+		<resolvepath propertyName="src.dir.resolved" file="${build.dir.resolved}/src" />
 		
 		<if>
 			<equals arg1="${branch}" arg2="master" />
@@ -43,7 +43,7 @@
 		</else>
 		</if>
 		
-		<composer command="install" composer="${composer.resolved}" >
+		<composer command="install" >
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
@@ -52,7 +52,7 @@
 
 		</composer>
 
-		<composer command="update" composer="${composer.resolved}" >
+		<composer command="update" >
 	
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
@@ -68,6 +68,7 @@
 			<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 		</tstamp>
 		<echo msg="Making package ${TSTAMP} in ${package.resolved}"/>
+		<phingcall target="clone" />
 		<phingcall target="Clean_up"/>
 		<delete file="${package.folder}/file_package.tar.gz"/>
 		<tar destfile="${package.folder}/file_package.tar.gz" compression="gzip" includeemptydirs="true">
