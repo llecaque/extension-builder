@@ -2,7 +2,7 @@
 
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
-	<property name="extension_branch" value="develop" />
+	<property name="extension_branch" value="test" />
 	<tstamp>
 		<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
 	</tstamp>
@@ -11,7 +11,7 @@
 	<property name="package.name" value="${env.BUILD_TAG}_${TSTAMP}" />
 	<echo msg="${package.name}" />
 
-	<property name="new.deployment.name" value="${env.BUILD_TAG}PR2" />
+	<property name="new.deployment.name" value="${extension}${extension_branch}" />
 
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
 	<echo msg="${build.dir.resolved}" />
@@ -31,6 +31,8 @@
 
 	</target>
 
+
+	
 	<target name="clone" description="clone deployer package">
 		<gitclone repository="git@github.com:oat-sa/deploy-test-package.git" targetPath="${build.dir.resolved}/package" />
 		<resolvepath propertyName="package.dir.resolved" file="${build.dir.resolved}/package" />
@@ -55,6 +57,9 @@
 			<arg path="${package.dir.resolved}" />
 
 		</composer>
+		
+		<exec command='sed "s/\(${extension}.*dev-\)\(.*\)\"/\1${extension_branch}\"/g" composer.json > composer.json' dir="${build.dir.resolved}/package" />
+
 
 		<composer command="update" composer="/usr/local/bin/composer">
 
