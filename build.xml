@@ -11,6 +11,8 @@
 	<property name="package.name" value="${env.BUILD_TAG}_${TSTAMP}" />
 	<echo msg="${package.name}" />
 
+	<property name="new.deployment.name" value="${env.BUILD_TAG}PR2" />
+
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
 	<echo msg="${build.dir.resolved}" />
 
@@ -71,8 +73,7 @@
 			<isset property="new.deployment.name" />
 			<then>
 
-				<phingcall target="clone" />
-				<phingcall target="Clean_up" />
+		
 				<exec command='sed -i "s*testDeploy*${new.deployment.name}*g" build.properties' dir="${build.dir.resolved}/package" />
 				<exec command='sed -i "s*package*${new.deployment.name}*g" db.properties' dir="${build.dir.resolved}/package" />
 
@@ -93,6 +94,8 @@
 
 		<phingcall target="clone" />
 		<phingcall target="Clean_up" />
+		<phingcall target="create_new_deployment" />
+		
 		<echo file="${build.dir.resolved}/package/continuousphp.package" msg='{"build_id":"${package.name}","ref":"${branch}","commit":"tbd"}' />
 		<delete file="${build.dir.resolved}/${package.name}.tar.gz" />
 		<tar destfile="${build.dir.resolved}/build/${package.name}.tar.gz" compression="gzip" includeemptydirs="true">
