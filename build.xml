@@ -2,7 +2,7 @@
 
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
-	<property file="branch.properties" />
+	<property name="extension_branch" value="test" />
 
 	<tstamp>
 		<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
@@ -11,7 +11,8 @@
 
 	<property name="package.name" value="${env.BUILD_TAG}_${TSTAMP}" />
 	<echo msg="${package.name}" />
-
+	<echo msg="source ${env.ghprbSourceBranch}" />
+	
 	<property name="new.deployment.name" value="${extension}${extension_branch}" />
 
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
