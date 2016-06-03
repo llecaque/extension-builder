@@ -58,9 +58,9 @@
 
 		</composer>
 		
-		<exec command="pwd" />
-		<exec command="ls" />
-
+		<exec command="pwd" logoutput="true" passthru="true" />
+		<exec command="ls" logoutput="true" passthru="true"/>
+		<echo msg="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
 		<exec command="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
 
 
