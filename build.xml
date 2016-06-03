@@ -61,7 +61,7 @@
 		
 			
 		<exec command="git log --format='%d' -n 1 | awk '{print $2}' | sed 's/origin\///' | sed 's/,//g'" logoutput="true" passthru="true" returnProperty="extension_branch" />                                                            "	
-		<exho msg="Extension brancm = ${extension_branch}" />
+		<echo msg="Extension branc = ${extension_branch}" />
 		<exec command="pwd" logoutput="true" passthru="true" />
 		<exec command="ls" logoutput="true" passthru="true"/>
 		<echo msg="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
