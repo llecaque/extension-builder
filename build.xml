@@ -2,7 +2,7 @@
 
 	<property name="branch" value="test/master-phpunit" />
 	<property name="extension" value="oat-sa/tao-core" />
-	
+	<property file="branch.properties" />
 
 	<tstamp>
 		<format property="TSTAMP" pattern="%Y%m%d_%H%M%S" />
@@ -60,7 +60,6 @@
 		</composer>
 		
 			
-		<exec command="git log --format='%d' -n 1 | awk '{print $2}' | sed 's/origin\///' | sed 's/,//g'" logoutput="true" passthru="true" returnProperty="extension_branch" />                                                            "	
 		<exec command="pwd" logoutput="true" passthru="true" />
 		<exec command="ls" logoutput="true" passthru="true"/>
 		<echo msg="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
