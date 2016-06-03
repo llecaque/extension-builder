@@ -58,8 +58,8 @@
 
 		</composer>
 		
-		<echo msg="sed -i 's/\(${extension}.*dev-\)\(.*\)/\1${extension_branch}/g' composer.json" />
-		<exec command="sed -i 's/\(${extension}.*dev-\)\(.*\)\"/\1${extension_branch}\"/g' composer.json " dir="${build.dir.resolved}/package"/>
+		<exec command="pwd && ls" />
+		<exec command="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
 
 
 		<composer command="update" composer="/usr/local/bin/composer">
