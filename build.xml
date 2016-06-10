@@ -113,7 +113,7 @@
 				<include name="**/**" />
 			</fileset>
 		</tar>
-		<phingcall target="deploy">
+		<phingcall target="deploy" />
 	</target>
 
 	<target name="Clean_up" description="Removes git meta information, dramatically reduce package size">
