@@ -12,7 +12,7 @@
 	<echo msg="${package.name}" />
 	<property name="extension_branch" value="${env.ghprbSourceBranch}" />
 	
-	<echo msg="${env.ghprbPullId}"
+	<echo msg="${env.ghprbPullId}" />
 	<property name="new.deployment.name" value="taocore-PR828}" />
 
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
