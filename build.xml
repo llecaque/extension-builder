@@ -12,7 +12,8 @@
 	<echo msg="${package.name}" />
 	<property name="extension_branch" value="${env.ghprbSourceBranch}" />
 	
-	<property name="new.deployment.name" value="taocore-${extension_branch}" />
+	<echo msg="${env.ghprbPullId}"
+	<property name="new.deployment.name" value="taocore-PR828}" />
 
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
 	<echo msg="${build.dir.resolved}" />
@@ -85,7 +86,6 @@
 
 		
 				<exec command='sed -i "s*testDeploy*${new.deployment.name}*g" build.properties' dir="${build.dir.resolved}/package" />
-				<exec command='sed -i "s*-**g" build.properties' dir="${build.dir.resolved}/package" />
 				<exec command='sed -i "s*package*${new.deployment.name}*g" db.properties' dir="${build.dir.resolved}/package" />
 
 				
