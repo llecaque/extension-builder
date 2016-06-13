@@ -13,7 +13,7 @@
 	<property name="extension_branch" value="${env.ghprbSourceBranch}" />
 	
 	<echo msg="${env.ghprbPullId}" />
-	<property name="new.deployment.name" value="taocore-PR828}" />
+	<property name="new.deployment.name" value="tao-core-PR${env.ghprbPullId}" />
 
 	<resolvepath propertyName="build.dir.resolved" file="${env.WORKSPACE}" />
 	<echo msg="${build.dir.resolved}" />
