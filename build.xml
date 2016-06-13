@@ -63,8 +63,8 @@
 			
 		<exec command="pwd" logoutput="true" passthru="true" />
 		<exec command="ls" logoutput="true" passthru="true"/>
-		<echo msg="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
-		<exec command="./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" logoutput="true" passthru="true"/>
+		<echo msg="bash ./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" />
+		<exec command="bash ./replace.sh ${build.dir.resolved}/package/composer.json ${extension} ${extension_branch}" logoutput="true" passthru="true"/>
 
 
 		<composer command="update" composer="/usr/local/bin/composer">
