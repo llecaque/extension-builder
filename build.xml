@@ -86,6 +86,7 @@
 
 		
 				<exec command='sed -i "s*testDeploy*${new.deployment.name}*g" build.properties' dir="${build.dir.resolved}/package" />
+				<exec command='sed -i "s*package.folder=${new.deployment.name}*package.folder=taocorePR${env.ghprbPullId}*g" build.properties' dir="${build.dir.resolved}/package" />
 				<exec command='sed -i "s*package*${new.deployment.name}*g" db.properties' dir="${build.dir.resolved}/package" />
 
 				
