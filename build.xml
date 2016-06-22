@@ -51,7 +51,7 @@
 			</else>
 		</if>
 
-		<composer command="install" composer="/usr/local/bin/composer">
+		<composer command="update" composer="/usr/local/bin/composer">
 			<arg value="--no-interaction" />
 			<arg value="--no-scripts" />
 			<arg value="--no-progress" />
